@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html th:fragment="parent(content,title)" lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html
+        class="dark"
+        data-th-fragment="parent(content,title)" lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-th-replace="${title}" >Title</title>
     <link data-th-href="@{'../static/css/output.css'}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 </head>
 <body>
 
-    <div data-th-replace="${content}"></div>
-    <div class="bg-green-400"> hello</div>
+<!--    navbar starts -->
+        <div data-th-replace="~{header :: navbar}"></div>
+<!--    navbar ends -->
+
+<!--    main content starts -->
+
+
+    <div class=" h-screen w-full dark:bg-gray-900 dark:text-white">
+        <section  data-th-replace="${content}" ></section>
+    </div>
+<!--    main content ends -->
 
 <!--    script tag -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
