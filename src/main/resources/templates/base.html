@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html th:fragment="parent(content,title)" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-replace="${title}" >Title</title>
+    <link data-th-href="@{'../static/css/output.css'}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div data-th-replace="${content}"></div>
+    <div class="bg-green-400"> hello</div>
+
+<!--    script tag -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
