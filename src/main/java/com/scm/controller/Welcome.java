@@ -2,7 +2,9 @@ package com.scm.controller;
 
 import com.scm.dto.RegisterDto;
 import com.scm.entity.User;
+import com.scm.helper.Alert;
 import com.scm.services.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +45,7 @@ public class Welcome {
 
     // post register endpoint
     @PostMapping("/register")
-    public String register(@ModelAttribute RegisterDto registerDto) {
+    public String register(@ModelAttribute RegisterDto registerDto, HttpSession httpSession) {
         // get the form details from modelAttribute
         User user = User.builder()
                 .username(registerDto.getName())
@@ -55,7 +57,12 @@ public class Welcome {
         // save the user
         userService.saveUser(user);
         // redirect to login page
-        return "login";
+        Alert alert = Alert.builder()
+                .message("Registered Successfully")
+                .type("green")
+                .build();
+        httpSession.setAttribute("alert", alert);
+        return "redirect:/scm/signup";
         // else redirect to signp page
 //        return "register";
     }

@@ -33,7 +33,8 @@ public class User {
     private boolean emailVerified;
     private boolean phoneVerified;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Provider provider = Provider.SELF;
     private String providerId;
 
