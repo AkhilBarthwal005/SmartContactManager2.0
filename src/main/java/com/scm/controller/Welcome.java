@@ -5,9 +5,11 @@ import com.scm.entity.User;
 import com.scm.helper.Alert;
 import com.scm.services.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -45,7 +47,11 @@ public class Welcome {
 
     // post register endpoint
     @PostMapping("/register")
-    public String register(@ModelAttribute RegisterDto registerDto, HttpSession httpSession) {
+    public String register(@Valid @ModelAttribute RegisterDto registerDto,BindingResult bindingResult, HttpSession httpSession) {
+        // validate the form
+        if(bindingResult.hasErrors()){
+            return "signup";
+        }
         // get the form details from modelAttribute
         User user = User.builder()
                 .username(registerDto.getName())
@@ -53,7 +59,6 @@ public class Welcome {
                 .password(registerDto.getPassword())
                 .about(registerDto.getAbout())
                 .build();
-        // validate the form
         // save the user
         userService.saveUser(user);
         // redirect to login page
